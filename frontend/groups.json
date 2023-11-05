@@ -1,0 +1,7 @@
+{
+"groups": [
+    { "building_name": "myhal", "latitude": 37.7749, "longitude": -122.4194 , "users": ["James","Zach"] },
+    { "building_name": "robarts", "latitude": 37.7749, "longitude": -122.4194 , "users": [] }
+  ]
+}
+

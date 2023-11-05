@@ -1,0 +1,9 @@
+{
+    "friends": [
+      {  "name": "James", "latitude": 37.7749, "longitude": -122.4194 },
+      {  "name": "Zach", "latitude": 37.801, "longitude": -122.4194 },
+      {  "name": "Ryan", "latitude": 37.7949, "longitude": -122.4194 }
+
+    ]
+  }
+  
