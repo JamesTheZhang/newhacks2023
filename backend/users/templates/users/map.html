@@ -1,0 +1,494 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+    .filter-bar{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    height: 100px;
+    align-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    justify-content: center;
+    
+}
+
+button{
+    width: fit-content
+}
+
+h2{
+    grid-column: 2;
+}
+
+.map-div{
+    
+    position: relative;
+    justify-items: center;
+}
+
+#map-img{
+    display:block;
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#rz{
+    position:absolute;
+    top:40%;
+    left:42%;
+}
+#sf{
+    position:absolute;
+    top:60%;
+    left:53%;
+}
+#nc{
+    position:absolute;
+    top:40%;
+    left:63%;
+}
+
+.locationDiv{
+    display:none;
+    position:absolute;
+    top:20%;
+    left:50%;
+    background-color:white;
+    width: 300px;
+    font-size: 1.2em;
+    border: 2px solid black;
+}
+.locationProfile{
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    font-size: 16px;
+    align-items: center;
+}
+
+.locationProfile > p{
+    grid-column: span 7;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.profileDiv{
+    display:none;
+    position:absolute;
+    top:10%;
+    left:50%;
+    background-color: white;
+    border: 1px solid black;
+}
+.profileHeader{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid black;
+    width: 400px;
+    align-items: center;
+    
+}
+.profileBody{
+    align-items: left;
+    height:fit-content;
+    width:auto;
+    border: 1px solid black;
+}
+.profile-button{
+    height:60px;
+    width:80px;
+    text-align: center;
+}
+h5{
+    grid-column: span 3;
+}
+#profilename{
+    height:5px;
+}
+
+.profileHeaderModal{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid black;
+    
+    align-items: center;
+    
+}
+.profileBodyModal{
+    align-items: left;
+    height:fit-content;
+    width:auto;
+}
+
+</style>
+
+
+
+<div class="filter-bar">
+    <h2>Filter by:</h2>
+    <button class="btn btn-outline-primary" aria-current="page" id="filter_courses_btn" data-bs-toggle="modal" data-bs-target="#coursesModal">Courses</button>
+    <button class="btn btn-outline-primary" aria-current="page" id="filter_location_btn" data-bs-toggle="modal" data-bs-target="#locationModal">Location</button>
+    <button class="btn btn-outline-primary" aria-current="page" id="filter_friends_btn" data-bs-toggle="modal" data-bs-target="#friendsModal">Friends</button>
+</div>
+<div class="map-div">
+    <img src="../../media/map.png", id="map-img", alt="map", height="600px">
+    <img src="../../media/marker1.png", id="rz", alt="m1", height="60px">
+    <img src="../../media/Location.png", id="sf", alt="l1", height="50px">
+
+
+    <div class="locationDiv" id="locationDiv">
+        <div class="locationProfile">
+            <img src="../../media/onpfp.png" height="50px">
+            <p>firstname lastname</p>
+        </div>
+    </div>
+
+    <div class="profileDiv" id="profileDiv">
+        <div class="profileHeader">
+            <img src="", alt="pfp", id="pfp", height="60px">
+            <h5 id="username">username</h5>
+            <button class="btn btn-primary profile-button">Message</button>
+            <button class="btn btn-primary profile-button">Add Friend</button>
+        </div>
+        <div class="profileBody">
+            <p id="profilename">name</p>
+            <ul id="profileinfo">
+                <li>yr2</li>
+                <li>yr2</li>
+                <li>yr2</li>
+                <li>yr2</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal" id="coursesModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Courses</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course1" name="course1" value="MAT186" checked>
+                <label class="form-check-label">MAT186</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course2" name="course2" value="MAT188" checked>
+                <label class="form-check-label">MAT188</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course3" name="course3" value="APS100" checked>
+                <label class="form-check-label">APS100</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course4" name="course4" value="APS110" checked>
+                <label class="form-check-label">APS110</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course5" name="course5" value="APS111" checked>
+                <label class="form-check-label">APS111</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="course6" name="course6" value="CIV100" checked>
+                <label class="form-check-label">CIV100</label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="locationModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Locations</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location1" name="location1" value="Robarts" checked>
+                <label class="form-check-label">Robarts</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location2" name="location2" value="Gerstein" checked>
+                <label class="form-check-label">Gerstein</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location3" name="location3" value="SF Library" checked>
+                <label class="form-check-label">SF Library</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location4" name="location4" value="Bahen" checked>
+                <label class="form-check-label">Bahen</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location5" name="location5" value="Myhal" checked>
+                <label class="form-check-label">Myhal</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location6" name="location6" value="UC Library" checked>
+                <label class="form-check-label">UC Library</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="location7" name="location7" value="Medical Sciences Building" checked>
+                <label class="form-check-label">Medical Sciences Building</label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="friendsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Filter by Friends</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                <label class="form-check-label" for="radio1">Search All</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                <label class="form-check-label" for="radio2">Search Friends Only</label>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="profileDiv" id="profileDiv">
+    
+    
+</div>
+  <div class="modal" id="profileModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        
+            <div class="profileHeaderModal">
+                <img src="", alt="pfp", id="pfpm", height="60px">
+                <h5 id="usernamem">username</h5>
+                <button class="btn btn-primary profile-button">Message</button>
+                <button class="btn btn-primary profile-button">Add Friend</button>
+            </div>
+        
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="profileBodyModal">
+                <p id="profilenamem">name</p>
+                <ul id="profileinfom">
+                    <li>yr2</li>
+                    <li>yr2</li>
+                    <li>yr2</li>
+                    <li>yr2</li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script defer>
+    var profileDiv = document.getElementById("profileDiv");
+    var pfp = document.getElementById("pfp");
+    var username = document.getElementById("username");
+    var profilename = document.getElementById("profilename");
+    var profileinfo = document.getElementById("profileinfo");
+
+    var locationDiv = document.getElementById("locationDiv");
+    var profileModal = document.getElementById("profileModal");
+
+    var pfpm = document.getElementById("pfpm");
+    var usernamem = document.getElementById("usernamem");
+    var profilenamem = document.getElementById("profilenamem");
+    var profileinfom = document.getElementById("profileinfom");
+    
+    var rz = {
+        username: "Cool_person123",
+        name: "Ryan Zhu",
+        year: "2nd",
+        major: "Computer Engineering",
+        status: "Studying for ECE212",
+        interests: ['Gaming', 'Music', 'Technology'],
+        studySpots: ['Gerstein Library'],
+        curLocation: "Myhal",
+        gender: 'm',
+        pfp: "../../media/rzpfp.png",
+        isFriend: true,
+        score: 1
+    };
+
+    var on = {
+        username: "honnoji6",
+        name: "Oda Nobunaga",
+        year: "1st",
+        major: "Chemical Engineering",
+        status: "Studying for APS110",
+        interests: ['Music', 'Sports', 'Movies'],
+        studySpots: ['SF Library'],
+        curLocation: "SF Library",
+        gender: 'f',
+        pfp: "../../media/onpfp.png",
+        isFriend: false,
+        score: 0.93
+    };
+    var jd = {
+        username: "not_sus01",
+        name: "Jane Doe",
+        year: "3rd",
+        major: "Industrial Engineering",
+        status: "Studying for JRE420",
+        interests: ['Hiking', 'Pottery', 'Photography'],
+        studySpots: ['Robarts'],
+        curLocation: "SF Library",
+        gender: 'f',
+        pfp: "../../media/jdpfp.png",
+        isFriend: false,
+        score: 0.78
+    };
+    var students = [rz, on, jd];
+
+    const sfMarker = document.getElementById("sf");
+    sfMarker.addEventListener("click", () => {
+        while(true){
+            var last = locationDiv.lastElementChild;
+            if (last) {
+                locationDiv.removeChild(last);
+            } else {
+                break;
+            }
+        }
+        for (let i = 0; i < students.length; i++){ //assume list has already been sorted by compatibility score
+            if (students[i].curLocation == "SF Library"){
+                var d = document.createElement("div");
+                d.classList.add("locationProfile");
+                var pic = document.createElement("img");
+                pic.setAttribute("src", students[i].pfp);
+                d.appendChild(pic);
+                var p = document.createElement("p");
+                p.innerHTML = students[i].name;
+                d.appendChild(p);
+                locationDiv.appendChild(d);
+                d.setAttribute("data-bs-toggle", "modal");
+                d.setAttribute("data-bs-target", "#profileModal");
+                d.addEventListener("mouseup", () => {
+                    profileModalFill(students[i]);
+                    
+                })
+            }
+        }
+
+        locationDiv.style.display = "grid";
+        locationDiv.style.top = "42%";
+        locationDiv.style.left = "53%";
+        profileDiv.style.display = "none";
+
+    })
+
+    function profileModalFill(pm){
+        //var pm = students[x];
+        profileDiv.style.display = "none";
+        locationDiv.style.display = "none";
+        pfpm.setAttribute("src", pm.pfp);
+        usernamem.innerHTML = pm.username;
+        profilenamem.innerHTML = pm.name;
+        for (let i = 0; i < 4; i++){
+            var last = profileinfom.lastElementChild;
+            if (last) profileinfom.removeChild(last);
+        }
+        var li = document.createElement("li");
+        let text = document.createTextNode(pm.year + " year " + pm.major);
+        li.appendChild(text);
+        profileinfom.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Status: " + pm.status);
+        li.appendChild(text);
+        profileinfom.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Interests: " + pm.interests[0] + ", " + pm.interests[1] + ", " + pm.interests[2]);
+        li.appendChild(text);
+        profileinfom.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Commonly studies at: " + pm.studySpots[0]);
+        li.appendChild(text);
+        profileinfom.appendChild(li);
+    }
+
+    const mapimg = document.getElementById("map-img");
+    mapimg.addEventListener("click", () => {
+        profileDiv.style.display = "none";
+        locationDiv.style.display = "none";
+    })
+    
+    function profilePopFromMarker(pm){
+        profileDiv.style.display = "block";
+        pfp.setAttribute("src", pm.pfp);
+        username.innerHTML = pm.username;
+        profilename.innerHTML = pm.name;
+        for (let i = 0; i < 4; i++){
+            var last = profileinfo.lastElementChild;
+            if (last) profileinfo.removeChild(last);
+        }
+        var li = document.createElement("li");
+        let text = document.createTextNode(pm.year + " year " + pm.major);
+        li.appendChild(text);
+        profileinfo.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Status: " + pm.status);
+        li.appendChild(text);
+        profileinfo.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Interests: " + pm.interests[0] + ", " + pm.interests[1] + ", " + pm.interests[2]);
+        li.appendChild(text);
+        profileinfo.appendChild(li);
+        var li = document.createElement("li");
+        text = document.createTextNode("Commonly studies at: " + pm.studySpots[0]);
+        li.appendChild(text);
+        profileinfo.appendChild(li);
+    }
+
+    const rzMarker = document.getElementById("rz");
+    rzMarker.addEventListener("click", () => {
+        locationDiv.style.display = "none";
+        profileDiv.style.top = "5%";
+        profileDiv.style.left = "42%";
+        profilePopFromMarker(rz);
+    });
+    
+
+
+    
+
+</script>
+  
+
+
+{% endblock content %}

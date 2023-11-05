@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/users/main.css">
+    {% if title %}
+        <title>Friends - {{ title }}</title>
+    {% else %}
+        <title>Friends - Home</title>
+    {% endif %}
+
+    
+
+</head>
+
+<body>
+
+    
+
+    <!--This page contains the general html for the website-->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div id="navbar-div" class="container-fluid navbar-div">
+                <a class="navbar-brand text-center" href="{% url 'views-default' %}"><img src="../../media/logo.png" alt="logo" height="60">Study Buddy</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar for logged in user -->
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav ma-auto mb-2 mb-lg-0"><!--These are things on the left of the navbar-->
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'map' %}">Map</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"><!--These are things on the right of the navbar-->
+                        <li class="nav-item">
+                            <a class="nav-link mb-1" aria-current="page" href="#" ><img src="../../media/Comment.png" alt="Messages"></a>
+                        </li>   
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'profile' %}"><img src="../../media/Profile Picture.png" alt="Profile" height="40px"></a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-primary" aria-current="page" id="log_out_btn">Log Out</button>
+                        </li>
+                        <script>
+                            document.getElementById("log_out_btn").addEventListener("click", function() {
+                                window.location.href = "{% url 'logout' %}";
+                            });
+                        </script>
+                    </ul>  
+                <!-- Nav for unlogged view -->
+                {% else %}
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <button class="btn btn-outline-primary" aria-current="page" id="log_in_btn">Log In</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" aria-current="page" id="register_btn">Register</button>
+                        </li>
+                        <script>
+                            document.getElementById("register_btn").addEventListener("click", function() {
+                                window.location.href = "{% url 'register' %}";
+                            });
+                            document.getElementById("log_in_btn").addEventListener("click", function() {
+                                window.location.href = "{% url 'login' %}";
+                            });
+                        </script>
+                    </ul>                 
+                {% endif %}
+              </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Insert pages here -->
+    {% block content %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</body>
+</html> 

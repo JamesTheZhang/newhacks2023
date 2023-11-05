@@ -1,0 +1,69 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+    * {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+
+  .landing-body{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    min-height: 100vh;
+    align-content: center;
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(to right, #2DF2FF, #3D5CFF);
+    
+  }
+
+  .landing-text{
+    grid-column: 2 / 8;
+  }
+
+  h1{
+    color: black;
+    font-size: 58px;
+    
+  }
+
+  p{
+    font-size: 24px;
+  }
+  
+  .landing-img{
+    grid-column: 9 / 12;
+    
+  }
+
+  
+  
+</style>
+
+<div class="landing-body">
+    <div class="landing-text">
+        <h1>Finding friends to study with
+            has never been easier. </h1>
+        <p>Study Buddy makes finding friends and like-minded peers on campus effortless.
+             With real-time location data displayed on a map, you'll know at a glance which friends are around, 
+             so you can catch up or collaborate without the need for multiple messages or calls.</p>
+        <p>Our innovative app harnesses the power of location data to connect university students with like-minded peers right on campus.
+             Find friends or strangers who share your interests, study together, and make learning an exciting journey
+              with our intuitive map-based platform.</p>
+    </div>
+    <div class="landing-img">
+        <img src="../../media/Ellipse 121.png" alt="Students studying">
+    </div>
+
+</div>
+{% endblock content %}

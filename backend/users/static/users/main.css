@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+
+  .landing-body{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(to right, purple, rgb(0, 68, 255))
+  }
+
+  h1{
+    color: aqua;
+  }
+
+  .navbar-div{
+    color: #64CCC5;
+}
+a{color: red;}
+button{
+    color:red;
+}
